@@ -1,4 +1,5 @@
-import React, {useState} from "react";
+import React from "react";
+import "./Button.css"
 
 type ButtonPropsType = {
     name: string
@@ -11,7 +12,7 @@ export const Button = (props: ButtonPropsType) => {
         props.callback()
     }
     return (
-        <button disabled={props.disabled} onClick={onClickButton}>{props.name}</button>
+        <button className='btn' disabled={props.disabled} onClick={onClickButton}>{props.name} </button>
     )
 
 }

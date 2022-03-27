@@ -1,6 +1,7 @@
 body {
     font-family: Arial, sans-serif;
-    min-height: 100vh;
+    /*min-height: 100vh;*/
+    padding-top: 200px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -25,6 +26,5 @@ h2 {
 .button {
     display: flex;
     justify-content: space-between;
-    color: #7153d4;
+    /*column-gap:70px;*/
 }
-
