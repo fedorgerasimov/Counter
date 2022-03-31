@@ -16,12 +16,13 @@ function App() {
 
 
   return (
-      <div className={style.wrapper}>
+      <div className={style.container}>
         <h2>{counter}</h2>
-        <div className={style.button}>
-          <Button disabled={counter > 4} callback={IncButton} name={'inc'}/>
-          <Button disabled={counter === 0} callback={ResetButton} name={'reset'}/>
+        <div className={style.buttons_container}>
+          <Button disabled={counter > 4} callback={IncButton} name={'INC'}/>
+          <Button disabled={counter === 0} callback={ResetButton} name={'RESET'}/>
         </div>
+
       </div>
   )
 }
