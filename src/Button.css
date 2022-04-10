@@ -1,7 +1,6 @@
 .btn {
     background-color: #ae95e3;
-    
-    font-size: 15px
+    font-size: 15px;
 }
 
 .btn::after {
