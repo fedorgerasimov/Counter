@@ -1,9 +1,13 @@
-.btn {
+.button {
     background-color: #ae95e3;
     font-size: 15px;
+    font-weight: bold;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 10px;
 }
 
-.btn::after {
+.button::after {
     content: '';
     position: absolute;
     z-index: -1;
@@ -12,18 +16,17 @@
     transition: all 0.3s;
 }
 
-.btn:hover {
+/*.button:hover {   !*кнопка подсвечивается при наведении*!
     color: black;
     background: #c6b8e3;
-}
+}*/
 
-.btn:focus,.btn:active {
+.button:focus,.button:active {
     outline: none !important;
     background-color: blueviolet;
 }
-/*
 
-.btn:focus,.btn:active {
+/*.button:focus,.button:active {
     outline: none !important;
     box-shadow: none;
     background-color: #242038;

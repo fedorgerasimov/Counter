@@ -1,0 +1,16 @@
+.counter {
+    margin: 0 auto;
+    padding: 25px 75px;
+    font-size: 50px;
+    color: lightgrey;
+    border: 3px solid #939191;
+    border-radius: 5px;
+}
+.stopCounter {
+    margin: 0 auto;
+    padding: 25px 75px;
+    font-size: 50px;
+    color: #cd1717;
+    border: 3px solid #939191;
+    border-radius: 5px;
+}

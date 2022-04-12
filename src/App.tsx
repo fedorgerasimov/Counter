@@ -1,26 +1,28 @@
 import React, {useState} from "react";
-import style from "./Counter.module.css"
-import {Button} from "./Button";
+import s from './App.module.css'
+import {Button} from "./components/Button/Button";
+import "./components/Button/Button.module.css"
+import DisplayValue from "./components/DisplayValue/DisplayValue";
 
 
 function App() {
-  let [counter, setCounter] = useState(0)
+  const [value, setValue] = useState(0)
 
-  const IncButton = () => {
-    setCounter(counter + 1)
+  const Increment = () => {
+    setValue(value + 1)
   }
 
-  const ResetButton = () => {
-    setCounter(0)
+  const Reset = () => {
+    setValue(0)
   }
 
 
   return (
-      <div className={style.container}>
-        <h2>{counter}</h2>
-        <div className={style.buttons_container}>
-          <Button disabled={counter > 4} callback={IncButton} name={'INC'}/>
-          <Button disabled={counter === 0} callback={ResetButton} name={'RESET'}/>
+      <div className={s.container}>
+        <DisplayValue value={value}/>
+        <div className={s.buttons_container}>
+          <Button disabled={value > 4} callback={Increment} name={'INC'}/>
+          <Button disabled={value === 0} callback={Reset} name={'RESET'}/>
         </div>
 
       </div>
