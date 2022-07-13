@@ -1,29 +1,33 @@
 .button {
+    display: inline-block;
+    font-size: 25px;
+    width: 125px;
+    height: 45px;
     background-color: #ae95e3;
-    font-size: 15px;
     font-weight: bold;
-    padding: 5px 10px;
-    border: none;
+    margin: 10px 7px 10px 7px;
     border-radius: 10px;
+    border: 3px solid #79b60a;
 }
 
-.button::after {
+/*.button::after {
     content: '';
     position: absolute;
     z-index: -1;
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     transition: all 0.3s;
-}
-
-/*.button:hover {   !*кнопка подсвечивается при наведении*!
-    color: black;
-    background: #c6b8e3;
 }*/
 
-.button:focus,.button:active {
+.button:hover {   /*кнопка подсвечивается при наведении*/
+    color: black;
+    background: #cdc4f8;
+}
+
+.button:active {
     outline: none !important;
     background-color: blueviolet;
+
 }
 
 /*.button:focus,.button:active {
@@ -32,3 +36,4 @@
     background-color: #242038;
     color: #F7ECE1;
 }*/
+

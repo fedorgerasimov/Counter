@@ -1,0 +1,52 @@
+.settingsOfCounter {
+    border: 3px solid #79b60a;
+    border-radius: 20px;
+    width: 300px;
+    height: 250px;
+    margin-right: 20px;
+    background-color: #440064;
+ }
+
+.buttonAreaOfSettings {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    width: 280px;
+    height: 100px;
+}
+
+.blockOfSettings {
+    display: flex;
+    margin-top: 10%;
+    margin-right: auto;
+    margin-left: auto;
+    background:  #440064;
+    border: 3px solid #79b60a;
+    border-radius: 20px;
+    color: #79b60a;
+    font-size: 20px;
+    text-align: left;
+    width: 280px;
+    height: 140px;
+    flex-wrap: wrap;
+    align-content: space-around;
+    justify-content: center;
+}
+
+.input {
+    border: 2px solid #79b60a ;
+    color: #002030;
+}
+
+.error {
+    border: red 4px solid;
+    color: red;
+}
+.buttonArea {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+

@@ -1,49 +1,12 @@
-/*
-body {
-    font-family: sans-serif;
-    !*min-height: 100vh;*!
+.container {
     display: flex;
-    justify-content: center;
     align-items: center;
-    background: lightgrey;
-}
-*/
-.wrapper {
-    background: lightgrey;
-    min-height:100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
-
-}
-
-.Counter {
-    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
-    background: linear-gradient(90deg, rgb(96, 68, 121) 50%, rgba(95, 109, 172, 0.99) 100%);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    row-gap: 30px;
-    border-radius: 10px;
-    border: 2px solid #a1abbb;
-
-}
-
-.buttons_container {
-    display: flex;
-    column-gap: 50px;
-    /*justify-content: space-between;*/
-    padding: 5px 5px;
-    margin: 0 auto;
-}
-
-.red {
-    color: red;
-}
 
 
-.containerInput {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
+    width: 700px;
+    height: 200px;
+
 }

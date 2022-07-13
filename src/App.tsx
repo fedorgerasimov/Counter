@@ -1,79 +1,85 @@
 import React, {useEffect, useState} from "react";
 import s from './App.module.css'
-import {Button} from "./components/Button/Button";
-import "./components/Button/Button.module.css"
-import DisplayValue from "./components/DisplayValue/DisplayValue";
-import displayValue from "./components/DisplayValue/DisplayValue";
+import {Settings} from "./components/Settings/Settings";
+import {Counter} from "./components/Counter/Counter";
 
 
 function App() {
-    const [startValue, setStartValue] = useState<number>(0)
     const [maxValue, setMaxValue] = useState<number>(0)
-    let [error, setError] = useState<string>('')
+    const [startValue, setStartValue] = useState<number>(0)
+    const [counter, setCounter] = useState<number>(0)
+    const [buttonIndicator, setButtonIndicator] = useState<boolean>(true)
 
-    const increment = () => {
-        setStartValue(startValue + 1)
-    }
 
-    const reset = () => {
-        setStartValue(0)
-    }
-
-    const inputStarValue = (value: number) => {
-        setStartValue(value)
-        if (startValue > value || startValue < 0) {
-            error = 'incorrect value'
-            setError(error)
-        } else setError('enter values and press "set"')
-    }
-
-    useEffect( ()=> {
-        let valueAsString = localStorage.getItem('startValue')  // вначале получаем значение и присваиваем переменной
-        if (valueAsString) {          //делаем проверку на NULL, затем нам нужно в useState отправить то что получили, для это делаем преобразование
-            let newValue = JSON.parse(valueAsString)   //JSON.parse  преобразовывает строку в объект
+    useEffect(() => {
+        const startValueAsString = localStorage.getItem('startValue')
+        startValueAsString && setStartValue(JSON.parse(startValueAsString))
+        /*if (startValueAsString) {
+            let newValue = JSON.parse(startValueAsString)
             setStartValue(newValue)
-        }
+        }*/
+        const maxValueAsString = localStorage.getItem('maxValue')
+        maxValueAsString && setMaxValue(JSON.parse(maxValueAsString))
+
+        /*let counterAsString = localStorage.getItem('startValue')
+        if (counterAsString) {
+            let newValue = JSON.parse(counterAsString)
+            setCounter(newValue)
+        }*/
+        const currentValueAsString = localStorage.getItem('startValue');
+        currentValueAsString && setCounter(JSON.parse(currentValueAsString))
     }, [])
 
-    useEffect( ()=> {
-        localStorage.setItem('startValue', JSON.stringify(startValue))
-    }, [startValue])
-
-    useEffect( ()=> {
-        let valueAsString = localStorage.getItem('maxValue')
-        if (valueAsString) {
-            let newValue = JSON.parse(valueAsString)
-            setStartValue(newValue)
-        }
-    }, [])
-
-    useEffect( ()=> {
+    const callBackMaxValue = (max: string) => {
+        const maxValue = Number(max)
+        setMaxValue(maxValue)
+        setButtonIndicator(false)
+    }
+    const callBackStartInputValue = (start: string) => {
+        const startValue = Number(start)
+        setStartValue(startValue)
+        setButtonIndicator(false)
+    }
+    const setValue = () => {
+        setButtonIndicator(true)
+        setCounter(startValue)
         localStorage.setItem('maxValue', JSON.stringify(maxValue))
-    }, [maxValue])
-
-    const onClickStart = () => {
-        setStartValue(startValue+1)
+        localStorage.setItem('startValue', JSON.stringify(startValue))
     }
-    const onClickMax = () => {
-        setMaxValue(maxValue+1)
+    const setCounterHandler = (c: number) => {
+        setCounter(c)
     }
+    const noticeMessage = (start: number, max: number) => {
+        let err: boolean
+        if (max <= start) {
+            err = true
+        } else {
+            err = start < 0;
+        }
 
+        return err
+    }
+    let error = noticeMessage(startValue, maxValue)
 
     return (
-        <div className={s.wrapper}>
-            <div className={s.Counter}>
-                <DisplayValue value={startValue}/>
-                <div className={s.buttons_container}>
-                    <Button disabled={startValue > 4} callback={increment} name={'INC'}/>
-                    <Button disabled={startValue === 0} callback={reset} name={'RESET'}/>
-                </div>
-            </div>
-            <div className={s.containerInput}>
-                <div>{startValue}</div>
-                <button onClick={onClickStart}>start</button>
-                <div>{maxValue}</div>
-                <button onClick={onClickMax}>max</button>
-            </div>
+        <div className={s.container}>
+            <Settings
+                setValue={setValue}
+                callBackMaxValue={callBackMaxValue}
+                callBackStartValue={callBackStartInputValue}
+                buttonIndicator={buttonIndicator}
+                startValue={startValue}
+                maxValue={maxValue}
+                error={error}
+            />
+            <Counter
+                counter={counter}
+                maxValue={maxValue}
+                startValue={startValue}
+                setCounter={setCounterHandler}
+                buttonIndicator={buttonIndicator}
+                error={error}
+            />
         </div>
     )
 }

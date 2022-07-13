@@ -1,0 +1,57 @@
+
+.counter {
+    border: 3px solid #79b60a;
+    border-radius: 20px;
+    width: 300px;
+    height: 250px;
+    margin-left: 20px;
+    background-color:  #440064;
+}
+
+.buttonBlock {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    width: 280px;
+    height: 100px;
+}
+
+/*DisplayModule*/
+.display {
+    color: #79b60a;
+    font-size: 100px;
+    margin-top: 10%;
+    margin-right: auto;
+    margin-left: auto;
+    background: #440064;
+    border: 3px solid #79b60a;
+    border-radius: 20px;
+    text-align: center;
+    width: 280px;
+    height: 140px;
+
+}
+
+.error {
+    color: red;
+    font-size: 100px;
+    margin-right: auto;
+    margin-left: auto;
+
+}
+.startMessage {
+    color: #79b60a;
+    margin-top: 10%;
+    margin-right: auto;
+    margin-left: auto;
+    font-size: 20px;
+}
+
+.errorMessage {
+color: red;
+margin-top: 10%;
+margin-right: auto;
+margin-left: auto;
+font-size: 20px;
+}
+
