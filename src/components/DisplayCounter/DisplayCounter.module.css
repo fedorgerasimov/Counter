@@ -1,0 +1,20 @@
+.startMessage {
+    color: white;
+    font-size: 22px;
+}
+
+.errorMessage {
+    color: red;
+    font-size: 34px;
+}
+
+.counter {
+    color: white;
+    font-size: 100px;
+}
+
+.error {
+    color: red;
+    font-size: 100px;
+
+}

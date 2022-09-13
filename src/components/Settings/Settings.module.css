@@ -1,4 +1,4 @@
-.settingsOfCounter {
+.container {
     border: 3px solid #79b60a;
     border-radius: 20px;
     width: 300px;
@@ -6,14 +6,6 @@
     margin-right: 20px;
     background-color: #440064;
  }
-
-.buttonAreaOfSettings {
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: auto;
-    width: 280px;
-    height: 100px;
-}
 
 .blockOfSettings {
     display: flex;
@@ -33,15 +25,6 @@
     justify-content: center;
 }
 
-.input {
-    border: 2px solid #79b60a ;
-    color: #002030;
-}
-
-.error {
-    border: red 4px solid;
-    color: red;
-}
 .buttonArea {
     display: flex;
     align-items: center;
@@ -50,3 +33,21 @@
     margin-right: auto;
 }
 
+/*
+.settings {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+
+  text-align: center;
+}
+
+.settingsError {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+
+  color: rgba(148, 0, 0, 0.9);
+  text-align: center;
+}
+*/

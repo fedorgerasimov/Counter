@@ -1,53 +1,126 @@
-import React from "react";
+import React, {useEffect} from "react";
 import s from "./Settings.module.css"
-import {Input} from "../Input";
-import {UniversalButton} from "../Button";
+import {useDispatch, useSelector} from "react-redux";
+import {AppRootStateType} from "../../state/store";
+import {
+    resetValueAC,
+    setCounterAC,
+    setErrorAC,
+    setMaxValueAC,
+    setSettingAC,
+    setStartValueAC
+} from "../../state/counter-reducer";
+import {UniversalInput} from "../UniversalInput";
+import {UniversalButton} from "../UniversalButton";
+import {Status} from "../../enums/status";
+import {Counter} from "../../enums/counter";
 
-type SettingsPropsType = {
-    callBackMaxValue: (maxInputValue: string) => void
-    callBackStartValue: (startInputValue: string) => void
-    setValue: () => void
-    buttonIndicator: boolean
-    startValue: number
-    maxValue: number
-    error: boolean
-}
+export const Settings = () => {
 
-export function Settings(props: SettingsPropsType) {
-    let strStartInputValue = JSON.stringify(props.startValue)
-    let strMaxInputValue = JSON.stringify(props.maxValue)
-    const setButtonHandler = () => {
-        props.setValue()
+    const maxValue = useSelector<AppRootStateType, number>(state => state.counter.maxValue)
+    const startValue = useSelector<AppRootStateType, number>(state => state.counter.startValue)
+    const status = useSelector<AppRootStateType, Status>(state => state.counter.status)
+    const dispatch = useDispatch()
+
+    const changeStartValue = (value: number) => {
+        if (value > Counter.MAX_VALUE) {
+            dispatch(setStartValueAC(Counter.MAX_VALUE))
+        } else {
+            dispatch(setStartValueAC(value))
+        }
+        dispatch(setSettingAC())
+        //status !== Status.SET && dispatch(setSettingAC())
     }
+
+    const changeMaxValue = (value: number) => {
+        if (value > Counter.MAX_VALUE) {
+            dispatch(setMaxValueAC(Counter.MAX_VALUE))
+        } else {
+            dispatch(setMaxValueAC(value))
+        }
+        dispatch(setSettingAC())
+        //status !== Status.SET && dispatch(setSettingAC())
+    }
+
+    const onChangeButtonHandler = () => {
+        dispatch(setCounterAC())
+        dispatch(resetValueAC(startValue))
+    }
+
+    useEffect(() => {
+        ((maxValue <= startValue || startValue < 0 || maxValue <= 0) && status !== Status.ERROR) && dispatch(setErrorAC())
+    }, [status, maxValue, startValue, dispatch])
+
     return (
-        <div className={s.settingsOfCounter}>
+        <div className={s.container}>
             <div className={s.blockOfSettings}>
-                <div>
-                <span>
-                    max value
-                </span>
-                    <Input
-                        callBack={props.callBackMaxValue}
-                        inputClass={props.maxValue <= props.startValue ? `${s.error}` : `${s.input}`}
-                        value={strMaxInputValue}
+                <span>max value:</span>
+                <div className={s.input}>
+                    <UniversalInput value={maxValue}
+                                    callback={changeMaxValue}
+                                    error={maxValue <= startValue || maxValue <= 0}
                     />
                 </div>
-                <div>
-                <span>
-                    start value
-                </span>
-                    <Input
-                        callBack={props.callBackStartValue}
-                        inputClass={props.startValue < 0 ? `${s.error}` : `${s.input}`}
-                        value={strStartInputValue}
+                <span>start value:</span>
+                <div className={s.input}>
+                    <UniversalInput value={startValue}
+                                    callback={changeStartValue}
+                                    error={status === Status.ERROR}
                     />
                 </div>
             </div>
-            <div className={s.buttonAreaOfSettings}>
-                <div className={s.buttonArea}>
-                    <UniversalButton name={'set'} callback={setButtonHandler} disabled={props.error || props.buttonIndicator}/>
+            <div className={s.buttonArea}>
+                <div>
+                    <UniversalButton name={'SET'}
+                                     callback={onChangeButtonHandler}
+                                     disabled={status !== Status.SET}/>
                 </div>
             </div>
         </div>
     )
 }
+
+ // let error: any;
+    // if (maxValue <= startValue) {
+    //     error = s.settingsError;
+    // } else {
+    //     error = s.settings;
+    // }
+    //const error = maxValue <= startValue ? s.settingsError : s.settings
+    //  if (maxValue <= startValue || startValue < Counter.MIN_VALUE) {
+    //dispatch(setErrorAC())
+  //}
+
+ /*return (
+        <div className={s.container}>
+            <div className={s.settings}>
+                <div className={error}>
+                    <span>max value:</span>
+                    <div className={s.input}>
+                        <UniversalInput value={maxValue}
+                                        callback={changeMaxValue}
+                                         error={status === Status.ERROR}
+                        />
+                    </div>
+                </div>
+            </div>
+            <div className={s.settings}>
+                <div className={error}>
+                    <span>start value:</span>
+                    <div className={s.input}>
+                        <UniversalInput value={startValue}
+                                        callback={changeStartValue}
+                                         error={status === Status.ERROR}
+                        />
+                    </div>
+                </div>
+            </div>
+            <div className={s.buttonArea}>
+                <div>
+                    <UniversalButton name={'SET'}
+                                     callback={onChangeButtonHandler}
+                                     disabled={status === Status.SET}/>
+                </div>
+            </div>
+        </div>
+    )*/

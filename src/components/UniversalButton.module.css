@@ -19,15 +19,18 @@
     transition: all 0.3s;
 }*/
 
-.button:hover {   /*кнопка подсвечивается при наведении*/
+.button:hover:enabled { /*кнопка подсвечивается при наведении*/
     color: black;
     background: #cdc4f8;
 }
 
-.button:active {
+.button:active:enabled {
     outline: none !important;
     background-color: blueviolet;
+}
 
+.button:disabled {
+    background: #cdc4f8;
 }
 
 /*.button:focus,.button:active {

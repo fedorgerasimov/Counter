@@ -32,26 +32,11 @@
 
 }
 
-.error {
-    color: red;
-    font-size: 100px;
-    margin-right: auto;
+.buttonArea {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-left: auto;
-
-}
-.startMessage {
-    color: #79b60a;
-    margin-top: 10%;
     margin-right: auto;
-    margin-left: auto;
-    font-size: 20px;
-}
-
-.errorMessage {
-color: red;
-margin-top: 10%;
-margin-right: auto;
-margin-left: auto;
-font-size: 20px;
 }
 

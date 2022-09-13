@@ -1,63 +1,41 @@
-import React from "react";
 import s from "./Counter.module.css"
-import {UniversalButton} from "../Button";
+import {useDispatch, useSelector} from "react-redux";
+import {AppRootStateType} from "../../state/store";
+import {DisplayCounter} from "../DisplayCounter/DisplayCounter";
+import {increaseValueAC, resetValueAC} from "../../state/counter-reducer";
+import {UniversalButton} from "../UniversalButton";
+import {Status} from "../../enums/status";
 
-type CounterPropsType = {
-    maxValue: number
-    startValue: number
-    counter: number
-    setCounter: (counter: number) => void
-    buttonIndicator: boolean
-    error: boolean
-}
 
-export function Counter({counter, ...props}: CounterPropsType) {
+export const Counter = () => {
 
-    const callback = (nameOfButton: 'inc' | 'reset') => {
+    const counter = useSelector<AppRootStateType, number>(state => state.counter.counter)
+    const maxValue = useSelector<AppRootStateType, number>(state => state.counter.maxValue)
+    const startValue = useSelector<AppRootStateType, number>(state => state.counter.startValue)
+    const status = useSelector<AppRootStateType, Status>(state => state.counter.status)
+    const dispatch = useDispatch()
 
-        if (counter < props.maxValue && nameOfButton === 'inc') {
-            counter++
-        }
-
-        if (nameOfButton === 'reset') {
-            counter = props.startValue
-        }
-        props.setCounter(counter)
-    }
+    const resetButton = () => dispatch(resetValueAC(startValue))
+    const increaseButton = () => counter < maxValue && dispatch(increaseValueAC())
 
     return (
         <div className={s.counter}>
             <div className={s.display}>
-                {props.buttonIndicator
-                    ? <div className={counter === props.maxValue ? s.error : ''}>
-                        {counter}
-                    </div>
-                    :
-                    <div>
-                        {props.error
-                            ? <div className={s.errorMessage}> Incorrect value!</div>
-                            : <div className={s.startMessage}> Enter values and press "set"
-                            </div>
-                        }
-                    </div>
-
-                }
+                <DisplayCounter counter={counter} maxValue={maxValue} status={status}/>
             </div>
-            <div>
-                <div className={s.buttonBlock}>
-                    <UniversalButton
-                        name={'inc'}
-                        callback={() => callback('inc')}
-                        disabled={counter === props.maxValue ? true : !props.buttonIndicator}
-                    />
-                    <UniversalButton
-                        name={'reset'}
-                        callback={() => callback('reset')}
-                        disabled={!props.buttonIndicator}
-                    />
+            <div className={s.buttonArea}>
+                <div>
+                    <UniversalButton name={'INC'}
+                                     callback={increaseButton}
+                                     disabled={counter === maxValue || status === Status.ERROR || status === Status.SET}/>
+                                     {/*disabled={counter === maxValue || status !== Status.COUNTER*/}
+                </div>
+                <div>
+                    <UniversalButton name={'RESET'}
+                                     callback={resetButton}
+                                     disabled={counter === startValue || status !== Status.COUNTER}/>
                 </div>
             </div>
-
         </div>
     )
 }
